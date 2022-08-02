@@ -6,11 +6,14 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import axios from 'axios'
+import { text } from '@/api/utils.js'
+import { ElMessage } from 'element-plus';
 const textarea = ref('')
-const submit = (): void => {
-  axios.post(textarea.value).then((res): void => {
-    console.log(res)
+const submit = async () => {
+  const textRes = await text({text: textarea.value})
+  ElMessage({
+    type: 'success',
+    message: textRes.msg
   })
 }
 </script>
